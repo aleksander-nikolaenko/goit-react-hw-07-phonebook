@@ -14,8 +14,9 @@ export const ContactsItem = props => {
       </button>
       <div className={styles.wrapper}>
         {/* <span className={styles.decoration}></span> */}
-        <p className={styles.text}>{name}: </p>
-        <p className={styles.number}>{number}</p>
+        <p className={styles.text}>&#129333;&nbsp;&nbsp;{name}</p>
+        {/* <p> : </p> */}
+        <p className={styles.number}>&#9742;&nbsp;&nbsp;{number}</p>
       </div>
     </li>
   );

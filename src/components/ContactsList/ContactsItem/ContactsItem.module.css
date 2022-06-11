@@ -11,15 +11,16 @@
 }
 
 .number {
-  margin-top: 0px;
+  margin-top: 5px;
   margin-bottom: 0px;
   margin-left: 10px;
   font-weight: bold;
 }
 
 .button {
-  width: 30px;
-  height: 18px;
+  align-self: stretch;
+  min-width: 30px;
+  min-height: 18px;
   background-color: #900;
 
   color: #eee;
@@ -37,6 +38,9 @@
 }
 
 .wrapper {
+  width: 250px;
   display: flex;
-  align-items: center;
+  flex-direction: column;
+  /* justify-content: space-between; */
+  /* align-items: center; */
 }
