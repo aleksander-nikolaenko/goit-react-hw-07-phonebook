@@ -19,12 +19,12 @@
 
 .button {
   align-self: stretch;
-  min-width: 30px;
+  min-width: 24px;
   min-height: 18px;
   background-color: #900;
 
   color: #eee;
-  font-size: 14px;
+  font-size: 30px;
   border: none;
   border-radius: 10px;
   cursor: pointer;

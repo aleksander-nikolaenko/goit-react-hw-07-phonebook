@@ -1,15 +1,12 @@
-import { createStore } from 'redux';
+import { createStore, combineReducers } from 'redux';
+import { contactsReducer } from './contactsReducer';
+import { filterReducer } from './filterReducer';
 
-const rootReducer = (state = { value: 0 }, action) => {
-  console.log(action);
-  switch (action.type) {
-    case 'setValue':
-      return { value: action.payload };
+const rootReducer = combineReducers({
+  contacts: contactsReducer,
+  filter: filterReducer,
+});
 
-    default:
-      return state;
-  }
-};
 const store = createStore(
   rootReducer,
   window.__REDUX_DEVTOOLS_EXTENSION__ && window.__REDUX_DEVTOOLS_EXTENSION__()

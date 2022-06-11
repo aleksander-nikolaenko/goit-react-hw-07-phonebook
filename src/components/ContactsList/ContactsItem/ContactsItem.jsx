@@ -10,11 +10,11 @@ export const ContactsItem = props => {
         type="Submit"
         onClick={() => onDeleteContact(id)}
       >
-        x
+        &#128503;
       </button>
       <div className={styles.wrapper}>
         {/* <span className={styles.decoration}></span> */}
-        <p className={styles.text}>&#129333;&nbsp;&nbsp;{name}</p>
+        <p className={styles.text}>&#128447;&nbsp;&nbsp;{name}</p>
         {/* <p> : </p> */}
         <p className={styles.number}>&#9742;&nbsp;&nbsp;{number}</p>
       </div>

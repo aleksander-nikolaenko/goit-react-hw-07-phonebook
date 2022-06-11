@@ -1,7 +1,15 @@
-import PropTypes from 'prop-types';
 import styles from './Filter.module.css';
+import { useDispatch, useSelector } from 'react-redux';
+import { setFilterValue } from 'redux/filterActions';
+import { getFilterValue } from 'redux/filterSelectors';
 
-export const Filter = ({ value, onChange }) => {
+export const Filter = () => {
+  const dispatch = useDispatch();
+  const value = useSelector(getFilterValue);
+
+  const handleFilterValue = event =>
+    dispatch(setFilterValue(event.target.value));
+
   return (
     <label className={styles.label}>
       <p className={styles.text}>Find contacts by name</p>
@@ -9,13 +17,8 @@ export const Filter = ({ value, onChange }) => {
         className={styles.input}
         type="text"
         value={value}
-        onChange={onChange}
+        onChange={handleFilterValue}
       />
     </label>
   );
-};
-
-Filter.propTypes = {
-  value: PropTypes.string.isRequired,
-  onChange: PropTypes.func.isRequired,
 };
