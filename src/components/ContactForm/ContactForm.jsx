@@ -1,10 +1,15 @@
 import { useState } from 'react';
 import { nanoid } from 'nanoid';
-import PropTypes from 'prop-types';
-// import { Notify } from 'notiflix/build/notiflix-notify-aio';
-import styles from './ContactForm.module.css';
+import { toast } from 'react-toastify';
+import { getContacts } from 'redux/contactsSelectors';
+import { useDispatch, useSelector } from 'react-redux';
 
-export const ContactForm = ({ onSubmit, contactsList }) => {
+import styles from './ContactForm.module.css';
+import { addContact } from 'redux/contactsActions';
+
+export const ContactForm = () => {
+  const dispatch = useDispatch();
+  const contacts = useSelector(getContacts);
   const [name, setName] = useState('');
   const [number, setNumber] = useState('');
 
@@ -33,16 +38,19 @@ export const ContactForm = ({ onSubmit, contactsList }) => {
 
   const handleSubmit = event => {
     event.preventDefault();
-    const hasName = contactsList.find(
+    const hasName = contacts.find(
       contact => contact.name === name || contact.number === number
     );
     if (hasName) {
-      // Notify.warning(`${name} is already in contacts.`);
+      toast.error(`${name} is already in contacts.`);
     } else {
-      onSubmit({
+      const contact = {
+        id: nanoid(),
         name,
         number,
-      });
+      };
+      localStorage.setItem('contacts', JSON.stringify([contact, ...contacts]));
+      dispatch(addContact(contact));
       reset();
     }
   };
@@ -82,15 +90,4 @@ export const ContactForm = ({ onSubmit, contactsList }) => {
       </button>
     </form>
   );
-};
-
-ContactForm.propTypes = {
-  onSubmit: PropTypes.func.isRequired,
-  contactsList: PropTypes.arrayOf(
-    PropTypes.shape({
-      id: PropTypes.string.isRequired,
-      name: PropTypes.string.isRequired,
-      number: PropTypes.string.isRequired,
-    }).isRequired
-  ).isRequired,
 };
