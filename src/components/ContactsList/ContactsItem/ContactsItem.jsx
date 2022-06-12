@@ -1,17 +1,13 @@
 import PropTypes from 'prop-types';
 import styles from './ContactsItem.module.css';
 import { useDispatch } from 'react-redux';
-import { deleteContact } from 'redux/contactsActions';
+import { deleteContact } from 'redux/contacts/contactsActions';
 
 export const ContactsItem = props => {
   const { id, name, number } = props;
   const dispatch = useDispatch();
 
   const handleDeleteContact = id => {
-    const lsFilteredContacts = JSON.parse(
-      localStorage.getItem('contacts')
-    ).filter(contact => contact.id !== id);
-    localStorage.setItem('contacts', JSON.stringify(lsFilteredContacts));
     dispatch(deleteContact(id));
   };
 

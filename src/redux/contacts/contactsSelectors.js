@@ -1,4 +1,4 @@
-import { getFilterValue } from './filterSelectors';
+import { getFilterValue } from '../filter/filterSelectors';
 
 export const getContacts = state => state.contacts;
 

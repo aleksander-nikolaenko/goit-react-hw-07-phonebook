@@ -1,11 +1,11 @@
 import { useState } from 'react';
 import { nanoid } from 'nanoid';
 import { toast } from 'react-toastify';
-import { getContacts } from 'redux/contactsSelectors';
+import { getContacts } from 'redux/contacts/contactsSelectors';
+import { addContact } from 'redux/contacts/contactsActions';
 import { useDispatch, useSelector } from 'react-redux';
 
 import styles from './ContactForm.module.css';
-import { addContact } from 'redux/contactsActions';
 
 export const ContactForm = () => {
   const dispatch = useDispatch();
@@ -49,7 +49,6 @@ export const ContactForm = () => {
         name,
         number,
       };
-      localStorage.setItem('contacts', JSON.stringify([contact, ...contacts]));
       dispatch(addContact(contact));
       reset();
     }
