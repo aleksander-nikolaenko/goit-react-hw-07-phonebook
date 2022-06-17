@@ -14,7 +14,7 @@ export const App = () => {
       <h2>Contacts</h2>
       <Filter />
       <ContactsList />
-      <ToastContainer />
+      <ToastContainer position="top-right" autoClose={1500} />
     </Container>
   );
 };

@@ -6,9 +6,9 @@ import { getFilterValue } from 'redux/slice/selectors';
 export const Filter = () => {
   const dispatch = useDispatch();
   const value = useSelector(getFilterValue);
-
-  const handleFilterValue = event =>
+  const handleFilterValue = event => {
     dispatch(setFilterValue(event.target.value));
+  };
 
   return (
     <label className={styles.label}>
