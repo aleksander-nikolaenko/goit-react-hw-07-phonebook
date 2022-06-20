@@ -34,14 +34,7 @@ export const deleteContact = createAsyncThunk(
 const contactsSlice = createSlice({
   name: 'contacts',
   initialState,
-  // reducers: {
-  //   addContact(state, { payload }) {
-  //     return [payload, ...state];
-  //   },
-  //   deleteContact(state, { payload }) {
-  //     return state.filter(contact => contact.id !== payload);
-  //   },
-  // },
+
   extraReducers: {
     [fetchContacts.fulfilled]: (state, { payload }) => {
       state.status = 'idle';
@@ -81,4 +74,3 @@ const contactsSlice = createSlice({
 });
 
 export default contactsSlice.reducer;
-// export const { addContact, deleteContact } = contactsSlice.actions;

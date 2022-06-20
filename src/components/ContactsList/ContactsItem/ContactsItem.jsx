@@ -1,29 +1,15 @@
 import PropTypes from 'prop-types';
 import styles from './ContactsItem.module.css';
-import { useDispatch } from 'react-redux';
-import { deleteContact } from 'redux/slice/contacts';
-import { getContactsStatus } from 'redux/slice/selectors';
-import { useSelector } from 'react-redux';
+import { useDeleteContactMutation } from 'redux/queries/contactsQuery';
 import { LoaderButton } from 'components/LoaderButton';
-import { useState } from 'react';
-import { toast } from 'react-toastify';
+
 export const ContactsItem = props => {
   const { id, name, number } = props;
-  const dispatch = useDispatch();
-  const deleting = useSelector(getContactsStatus) === 'deleting';
-  const [isDeleting, setDeleting] = useState(deleting);
-  const handleDeleteContact = async id => {
-    setDeleting(true);
-    dispatch(deleteContact(id))
-      .unwrap()
-      .then(res => {
-        toast.success(`Contact "${res.name}" is deleting`);
-      })
-      .catch(error => {
-        setDeleting(false);
-        console.log(error.message);
-        toast.error(`Contact "${name}" is not deleting`);
-      });
+  const [deleteContactTrigger, { isLoading: isDeleting }] =
+    useDeleteContactMutation();
+
+  const handleDeleteContact = id => {
+    deleteContactTrigger(id);
   };
   return (
     <li className={styles.item}>

@@ -1,17 +1,15 @@
 import { useState } from 'react';
 import { nanoid } from 'nanoid';
 import { toast } from 'react-toastify';
-import { getContacts, getContactsStatus } from 'redux/slice/selectors';
-import { addContact } from 'redux/slice/contacts';
-import { useDispatch, useSelector } from 'react-redux';
+import { useAddContactMutation } from 'redux/queries/contactsQuery';
 import { LoaderButton } from 'components/LoaderButton';
 
 import styles from './ContactForm.module.css';
 
 export const ContactForm = () => {
-  const dispatch = useDispatch();
-  const contacts = useSelector(getContacts);
-  const isCreating = useSelector(getContactsStatus) === 'creating';
+  const result = useAddContactMutation();
+  const [addContactTrigger, { isLoading: isCreating }] = result;
+  const contacts = [];
   const [name, setName] = useState('');
   const [number, setNumber] = useState('');
 
@@ -47,19 +45,11 @@ export const ContactForm = () => {
       toast.warn(`Name or Number is already in contacts.`);
     } else {
       const contact = {
-        id: nanoid(),
         name,
         number,
       };
-      dispatch(addContact(contact))
-        .unwrap()
-        .then(res => {
-          toast.success(`${res.name} is add in contacts.`);
-          reset();
-        })
-        .catch(() => {
-          toast.error(`${name} isn't add in contacts.`);
-        });
+      addContactTrigger(contact);
+      reset();
     }
   };
   return (
